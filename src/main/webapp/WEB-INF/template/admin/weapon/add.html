@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head th:replace="admin/fragments/headtag :: headtag">
+
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed">
+
+<!-- BEGIN HEADER -->
+
+<div class="header navbar navbar-inverse navbar-fixed-top">
+
+    <!-- BEGIN TOP NAVIGATION BAR -->
+
+    <div class="navbar-inner">
+
+        <div class="container-fluid">
+
+            <!-- BEGIN LOGO -->
+
+            <a class="brand" href="/admin">
+
+                <img src="../../../../resources/media/image/logo.png" alt="logo"/>
+
+            </a>
+
+            <!-- END LOGO -->
+
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+                <img src="../../../../resources/media/image/menu-toggler.png" alt="" />
+
+            </a>
+
+            <!-- END RESPONSIVE MENU TOGGLER -->
+
+        </div>
+
+    </div>
+
+    <!-- END TOP NAVIGATION BAR -->
+
+</div>
+
+<!-- END HEADER -->
+
+<!-- BEGIN CONTAINER -->
+
+<div class="page-container">
+
+    <!-- BEGIN SIDEBAR -->
+
+    <div class="page-sidebar-wrapper" id="sidebar" th:include="admin/fragments/rightsider">
+
+    </div>
+
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <h3 class="page-title">
+
+                        武器管理
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+
+                    <div class="portlet box blue">
+
+                        <div class="portlet-title">
+
+                            <div class="caption"><i class="icon-reorder"></i>武器添加</div>
+
+                            <div class="tools">
+
+                                <a href="javascript:;" class="collapse"></a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="portlet-body form">
+
+                            <!-- BEGIN FORM-->
+
+                            <form action="/admin/weapon/add/action" class="form-horizontal" method="post"  enctype="multipart/form-data">
+
+                                <div class="control-group">
+
+                                    <label class="control-label">武器名称</label>
+
+                                    <div class="controls">
+
+                                        <input name="weapon_name" type="text" class="span6 m-wrap popovers" data-trigger="hover" data-content="武功再高，也怕菜刀" data-original-title="王麻子菜刀"/>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">武器国家</label>
+
+                                    <div class="controls">
+
+                                        <input name="weapon_country" type="text" class="span6 m-wrap popovers" data-trigger="hover" data-content="武功再高，也怕菜刀" data-original-title="王麻子菜刀"/>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">武器类别</label>
+
+                                    <div class="controls">
+
+                                        <input name="weapon_category" type="text" class="span6 m-wrap popovers" data-trigger="hover" data-content="武功再高，也怕菜刀" data-original-title="王麻子菜刀"/>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">武器属性</label>
+
+                                    <div class="controls">
+
+                                        <textarea name="weapon_attr" class="span6 m-wrap" rows="3"></textarea>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">缩略图</label>
+
+                                    <div class="controls">
+
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+
+                                                <img src="media/image/AAAAAA&amp;text=no+image" alt="" />
+
+                                            </div>
+
+                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+
+                                            <div>
+
+													<span class="btn btn-file"><span class="fileupload-new">Select image</span>
+
+													<span class="fileupload-exists">Change</span>
+
+													<input name="weapon_thumbnail" type="file" /></span>
+
+                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+
+                                            </div>
+
+                                        </div>
+
+                                        <span class="label label-important">NOTE!</span>
+
+											<span>
+
+											Attached image thumbnail is
+
+											supported in Latest Firefox, Chrome, Opera,
+
+											Safari and Internet Explorer 10 only
+
+											</span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="control-group">
+
+                                    <label class="control-label">模型文件</label>
+
+                                    <div class="controls">
+
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                            <div class="input-append">
+
+                                                <div class="uneditable-input">
+
+                                                    <i class="icon-file fileupload-exists"></i>
+
+                                                    <span class="fileupload-preview"></span>
+
+                                                </div>
+
+													<span class="btn btn-file">
+
+													<span class="fileupload-new">Select file</span>
+
+													<span class="fileupload-exists">Change</span>
+
+													<input name="weapon_model" type="file"/>
+
+													</span>
+
+                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">贴图</label>
+
+                                    <div class="controls">
+
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+
+                                                <img src="media/image/AAAAAA&amp;text=no+image" alt="" />
+
+                                            </div>
+
+                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+
+                                            <div>
+
+													<span class="btn btn-file"><span class="fileupload-new">Select image</span>
+
+													<span class="fileupload-exists">Change</span>
+
+													<input name="weapon_texture" type="file" /></span>
+
+                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+
+                                            </div>
+
+                                        </div>
+
+                                        <span class="label label-important">NOTE!</span>
+
+											<span>
+
+											Attached image thumbnail is
+
+											supported in Latest Firefox, Chrome, Opera,
+
+											Safari and Internet Explorer 10 only
+
+											</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div style="margin-left: 200px">
+
+                                    <button type="submit" class="btn blue">Submit</button>
+
+                                    <button type="button" class="btn">Cancel</button>
+
+                                </div>
+
+                            </form>
+
+                            <!-- END FORM-->
+
+                        </div>
+
+                    </div>
+
+                    <!-- END SAMPLE FORM PORTLET-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+    </div>
+    <!-- END PAGE -->
+
+</div>
+
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+
+<div class="page-footer" id="footer" th:include="admin/fragments/footer" />
+
+<!-- END FOOTER -->
+
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+<!-- BEGIN CORE PLUGINS -->
+
+<script src="../../../../resources/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+<script src="../../../../resources/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+<script src="../../../../resources/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+
+<script src="../../../../resources/media/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--[if lt IE 9]>
+
+<script src="../../../../resources/media/js/excanvas.min.js"></script>
+
+<script src="../../../../resources/media/js/respond.min.js"></script>
+
+<![endif]-->
+
+<script src="../../../../resources/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+<script src="../../../../resources/media/js/jquery.blockui.min.js" type="text/javascript"></script>
+
+<script src="../../../../resources/media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+<script src="../../../../resources/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="../../../../resources/media/js/ckeditor.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-fileupload.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/chosen.jquery.min.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/select2.min.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/wysihtml5-0.3.0.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-wysihtml5.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/jquery.tagsinput.min.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/jquery.toggle.buttons.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-datetimepicker.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/clockface.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/date.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/daterangepicker.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-colorpicker.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/bootstrap-timepicker.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/jquery.inputmask.bundle.min.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/jquery.input-ip-address-control-1.0.min.js"></script>
+
+<script type="text/javascript" src="../../../../resources/media/js/jquery.multi-select.js"></script>
+
+<script src="../../../../resources/media/js/bootstrap-modal.js" type="text/javascript" ></script>
+
+<script src="../../../../resources/media/js/bootstrap-modalmanager.js" type="text/javascript" ></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<script src="../../../../resources/media/js/app.js"></script>
+
+<script src="../../../../resources/media/js/form-components.js"></script>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script>
+
+    jQuery(document).ready(function() {
+
+        // initiate layout and plugins
+
+        App.init();
+
+        FormComponents.init();
+
+    });
+
+</script>
+
+<!-- END JAVASCRIPTS -->
+
+
+</body>
+
+<!-- END BODY -->
+
+</html>
