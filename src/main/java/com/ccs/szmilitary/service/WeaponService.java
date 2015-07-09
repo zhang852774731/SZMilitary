@@ -4,6 +4,7 @@ import com.ccs.szmilitary.dao.WeaponMapper;
 import com.ccs.szmilitary.domain.WeaponDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by zhang on 2015/7/2.
  */
 @Service
+@Transactional
 public class WeaponService {
     @Autowired
     private WeaponMapper weaponMapper;

@@ -29,31 +29,28 @@ public class WeaponController {
         return weaponDomains;
     }
 
-    @RequestMapping(value = "/api/weapon/webgl")
-    public String getWebGL(Model model){
-//        WeaponDomain weaponDomain = weaponService.getWeaponById(Integer.parseInt(weapon_id));
-//        if (!weaponDomain.getWeapon_model().equals("v1.api.upyun.com/ccssz")){//说明模型文件不为空
-//            String[] parse_model_path = weaponDomain.getWeapon_model().split("/");
-//            String model_name = parse_model_path[parse_model_path.length-1];
-//            String tmp_model = "/resources/webgl/tmp/model/"+model_name;
-//            File modelFile = new File(tmp_model);
-//            boolean result = upYun.readFile(weaponDomain.getWeapon_model(),modelFile);
-//            if (result){
-//                model.addAttribute("model_path",tmp_model);
-//            }
-//        }
-//        if (!weaponDomain.getWeapon_texture().equals("v1.api.upyun.com/ccssz")){//说明贴图文件不为空
-//            String[] parse_texture_path = weaponDomain.getWeapon_texture().split("/");
-//            String texture_name = parse_texture_path[parse_texture_path.length-1];
-//            String tmp_texture = "/resources/webgl/tmp/model/"+texture_name;
-//            File textureFile = new File(tmp_texture);
-//            boolean result = upYun.readFile(weaponDomain.getWeapon_texture(),textureFile);
-//            if (result){
-//                model.addAttribute("texture_path",tmp_texture);
-//            }
-//        }
-        model.addAttribute("model_path","http://ccssz.b0.upaiyun.com/szmilitary/upload/model/mod143634374852879.obj");
-        model.addAttribute("texture_path","/resources/webgl/tmp/texture/airforce1_diffuse_01.png");
+    @RequestMapping(value = "/api/weapon/{weapon_id}/webgl")
+    public String getWebGL(@PathVariable(value = "weapon_id") String weapon_id,Model model){
+        WeaponDomain weaponDomain = weaponService.getWeaponById(Integer.parseInt(weapon_id));
+        if (!weaponDomain.getWeapon_texture().equals("http://ccssz.b0.upaiyun.com")){//说明贴图文件不为空
+            String[] parse_texture_path = weaponDomain.getWeapon_texture().split("/");
+            String texture_name = parse_texture_path[parse_texture_path.length-1];
+            File textureFile = new File("/resources/webgl/tmp/texture/");
+            String tmp_texture = "/resources/webgl/tmp/texture/"+texture_name;
+            String suffix = texture_name.substring(texture_name.lastIndexOf(".")+1);
+            try{
+                File.createTempFile("texture",suffix,textureFile);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            boolean result = upYun.readFile(weaponDomain.getWeapon_texture(),textureFile);
+            if (result){
+                model.addAttribute("texture_path",tmp_texture);
+            }
+        }
+        if (!weaponDomain.getWeapon_model().equals("http://ccssz.b0.upaiyun.com")){//模型文件不为空
+            model.addAttribute("model_path",weaponDomain.getWeapon_texture());
+        }
         return "/webgl/webgl";
     }
 }
