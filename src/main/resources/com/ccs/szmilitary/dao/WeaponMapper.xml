@@ -13,10 +13,11 @@
         <result column="weapon_thumbnail" property="weapon_thumbnail"/>
         <result column="weapon_model" property="weapon_model"/>
         <result column="weapon_texture" property="weapon_texture"/>
+        <result column="weapon_gh_path" property="weapon_gh_path"/>
     </resultMap>
     <insert id="addWeapon" parameterType="WeaponDomain">
-        INSERT INTO weapon(weapon_name,weapon_country,weapon_category,weapon_attr,weapon_thumbnail,weapon_model,weapon_texture)
-        VALUE (#{weapon_name},#{weapon_country},#{weapon_category},#{weapon_attr},#{weapon_thumbnail},#{weapon_model},#{weapon_texture});
+        INSERT INTO weapon(weapon_name,weapon_country,weapon_category,weapon_attr,weapon_thumbnail,weapon_model,weapon_texture,weapon_gh_path)
+        VALUE (#{weapon_name},#{weapon_country},#{weapon_category},#{weapon_attr},#{weapon_thumbnail},#{weapon_model},#{weapon_texture},#{weapon_gh_path});
     </insert>
 
     <select id="getAll" resultMap="WeaponDomains">
@@ -29,7 +30,7 @@
 
     <update id="updateWeapon" parameterType="WeaponDomain">
         UPDATE weapon SET weapon_name=#{weapon_name},weapon_country=#{weapon_country},weapon_category=#{weapon_category},weapon_attr=#{weapon_attr},weapon_thumbnail=#{weapon_thumbnail},
-        weapon_model=#{weapon_model},weapon_texture = #{weapon_texture} WHERE id=#{id}
+        weapon_model=#{weapon_model},weapon_texture = #{weapon_texture},weapon_gh_path = #{weapon_gh_path} WHERE id=#{id}
     </update>
 
     <delete id="delWeapon" parameterType="int">

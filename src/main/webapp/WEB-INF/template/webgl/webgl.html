@@ -100,7 +100,6 @@
 
         var loader = new THREE.OBJLoader( manager );
         var modelpath = /*[[${model_path}]]*/null;
-        console.log("modelpath----->"+modelpath);
         loader.load(modelpath, function ( object ) {
 
             object.traverse( function ( child ) {
@@ -114,7 +113,6 @@
             } );
 
             object.position.y = +80;
-            object.position.z = -100;
             obj = object;
             scene.add( object );
 

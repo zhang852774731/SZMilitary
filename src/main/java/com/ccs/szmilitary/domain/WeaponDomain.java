@@ -14,6 +14,7 @@ public class WeaponDomain implements Serializable{
     private String weapon_thumbnail;
     private String weapon_model;
     private String weapon_texture;
+    private String weapon_gh_path;
 
     public int getId() {
         return id;
@@ -77,5 +78,13 @@ public class WeaponDomain implements Serializable{
 
     public void setWeapon_texture(String weapon_texture) {
         this.weapon_texture = weapon_texture;
+    }
+
+    public String getWeapon_gh_path() {
+        return weapon_gh_path;
+    }
+
+    public void setWeapon_gh_path(String weapon_gh_path) {
+        this.weapon_gh_path = weapon_gh_path;
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 public class Setting {
     @Value("${upyun.bucket}")
     public String upyun_bucket;
+    @Value("${ccssz.ghpath}")
+    public String ghpath;
 
     public String getUpyun_bucket() {
         return upyun_bucket;
@@ -18,5 +20,13 @@ public class Setting {
 
     public void setUpyun_bucket(String upyun_bucket) {
         this.upyun_bucket = upyun_bucket;
+    }
+
+    public String getGhpath() {
+        return ghpath;
+    }
+
+    public void setGhpath(String ghpath) {
+        this.ghpath = ghpath;
     }
 }
