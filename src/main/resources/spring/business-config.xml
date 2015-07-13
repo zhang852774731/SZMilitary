@@ -14,6 +14,11 @@
 
     <!-- import the dataSource definition -->
     <import resource="datasource-config.xml"/>
+    <!-- 引入shiro的配置文件 -->
+    <import resource="spring-config-shiro.xml"/>
+    <import resource="spring-mvc-shiro.xml"/>
+    <!--  引入缓存配置 -->
+    <import resource="spring-config-cache.xml"/>
     <!-- 文件上传设置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
         <property name="maxUploadSize" value="2000000000"/>
@@ -44,6 +49,7 @@
         <property name="basePackage" value="com.ccs.szmilitary.dao" />
     </bean>
 
+    <!--  又拍云设置 -->
     <bean id="upyun" class="main.java.com.UpYun">
         <constructor-arg name="bucketName" value="ccssz"></constructor-arg>
         <constructor-arg name="password" value="ccszhang"></constructor-arg>

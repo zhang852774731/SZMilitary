@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccs.szmilitary.dao.UserMapper">
+    <cache />
+    <insert id="addUser" parameterType="UserDomain">
+        INSERT INTO sz_user(username,password,salt,create_time)
+        VALUE (#{username},#{password},#{salt},#{create_time});
+    </insert>
+
+    <select id="getUserByUsername" parameterType="String" resultType="UserDomain">
+        SELECT * FROM sz_user WHERE username = #{0}
+    </select>
+
+    <update id="setUserLocked" parameterType="UserDomain">
+        UPDATE sz_user SET locked = #{locked} WHERE username = #{username}
+    </update>
+</mapper>
