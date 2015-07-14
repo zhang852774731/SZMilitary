@@ -26,9 +26,9 @@ public class AdminController {
         String error = null;
 
         if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
-            error = "用户名或者密码错误";
+            error = "对不起，没有该账户信息";
         } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-            error = "邮箱或者密码错误";
+            error = "用户名或者密码错误";
         } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
             error = "你输入的账户密码错误超过5次，现在暂时关闭，请您联系客服";
         } else if (LockedAccountException.class.getName().equals(exceptionClassName)) {
@@ -45,18 +45,5 @@ public class AdminController {
     private void setPath(Model model,String module,String action){
         model.addAttribute("module",module);
         model.addAttribute("action",action);
-    }
-
-    @RequestMapping(value = "/test")
-    public boolean test(HttpServletRequest req){
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        try {
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
-        } catch (Exception e) {
-            req.setAttribute("shiroLoginFailure", e.getClass());
-            return false;
-        }
-        return true;
     }
 }

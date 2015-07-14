@@ -19,11 +19,6 @@ public class UserRealm extends AuthorizingRealm{
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("asdf");
-        System.out.println("asdf");
-        System.out.println("asdf");
-        System.out.println("asdf");
-        System.out.println("asdf");
         return null;
     }
 
