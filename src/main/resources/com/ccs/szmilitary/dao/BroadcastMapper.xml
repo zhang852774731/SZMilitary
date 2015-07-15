@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccs.szmilitary.dao.BroadcastMapper">
+    <cache />
+    <resultMap id="BroadcastItemDomains" type="BroadcastItemDomain">
+        <id column="id" property="id"/>
+        <result column="broadcast_name" property="broadcast_name"/>
+        <result column="broadcast_ctime" property="broadcast_ctime"/>
+        <result column="weapon_order" property="weapon_order"/>
+        <result column="weapon_id" property="weapon_id"/>
+        <result column="weapon_attr" property="weapon_attr"/>
+    </resultMap>
+
+    <select id="getAllBroadcast" resultType="String">
+        SELECT DISTINCT broadcast_name FROM broadcastlist;
+    </select>
+
+    <select id="getBroadcastByName" parameterType="String" resultMap="BroadcastItemDomains">
+        SELECT * FROM broadcastlist WHERE broadcast_name = #{0}
+    </select>
+    
+    <insert id="addBroadcastBatch" parameterType="java.util.List">
+        INSERT INTO broadcastlist(broadcast_name,broadcast_ctime,weapon_order,weapon_id,weapon_attr)
+        VALUE
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (#{item.broadcast_name},#{item.broadcast_ctime},#{item.weapon_order},#{item.weapon_id},#{item.weapon_attr})
+        </foreach>
+    </insert>
+</mapper>
