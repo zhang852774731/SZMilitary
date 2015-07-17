@@ -6,20 +6,11 @@ import java.io.Serializable;
  * Created by zhang on 2015/7/15.
  */
 public class BroadcastItemDomain implements Serializable{
-    private int id;
     private String broadcast_name;
     private String broadcast_ctime;
     private int weapon_id;
     private int weapon_order;
     private String weapon_attr;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getBroadcast_name() {
         return broadcast_name;

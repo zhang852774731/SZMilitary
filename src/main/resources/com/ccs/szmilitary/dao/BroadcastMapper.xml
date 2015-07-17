@@ -5,7 +5,6 @@
 <mapper namespace="com.ccs.szmilitary.dao.BroadcastMapper">
     <cache />
     <resultMap id="BroadcastItemDomains" type="BroadcastItemDomain">
-        <id column="id" property="id"/>
         <result column="broadcast_name" property="broadcast_name"/>
         <result column="broadcast_ctime" property="broadcast_ctime"/>
         <result column="weapon_order" property="weapon_order"/>
@@ -18,7 +17,7 @@
     </select>
 
     <select id="getBroadcastByName" parameterType="String" resultMap="BroadcastItemDomains">
-        SELECT * FROM broadcastlist WHERE broadcast_name = #{0}
+        SELECT * FROM broadcastlist WHERE broadcast_name = #{0};
     </select>
     
     <insert id="addBroadcastBatch" parameterType="java.util.List">
@@ -28,4 +27,8 @@
             (#{item.broadcast_name},#{item.broadcast_ctime},#{item.weapon_order},#{item.weapon_id},#{item.weapon_attr})
         </foreach>
     </insert>
+
+    <delete id="deleteBroadcastByName" parameterType="String">
+        DELETE FROM broadcastlist WHERE broadcast_name = #{0};
+    </delete>
 </mapper>

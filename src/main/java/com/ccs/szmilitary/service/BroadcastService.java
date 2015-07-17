@@ -27,4 +27,8 @@ public class BroadcastService {
     public void addBroadcastBatch(List<BroadcastItemDomain> broadcastItemDomains){
         broadcastMapper.addBroadcastBatch(broadcastItemDomains);
     }
+
+    public void deleteBroadcastByName(String broadcastname){
+        broadcastMapper.deleteBroadcastByName(broadcastname);
+    }
 }

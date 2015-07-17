@@ -178,7 +178,7 @@ public class AdminWeapon {
         if (!weapon_texture.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_texture_path = "texture"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_texture.getOriginalFilename());
-            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_model);
+            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_texture);
             weapon_texture_path = "/szmilitary/upload/texture/"+weapon_texture_path;
             try{
                 boolean result = upYun.writeFile(weapon_texture_path,upyunFile_texture,true);

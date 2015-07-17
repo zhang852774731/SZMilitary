@@ -12,4 +12,5 @@ public interface BroadcastMapper {
     public List<String> getAllBroadcast();
     public List<BroadcastItemDomain> getBroadcastByName(String broadcastname);
     public void addBroadcastBatch(List<BroadcastItemDomain> broadcastItemDomains);
+    public void deleteBroadcastByName(String broadcastname);
 }
