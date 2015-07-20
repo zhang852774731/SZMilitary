@@ -68,36 +68,41 @@ public class AdminWeapon {
         if (!weapon_thumbnail.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_thumbnail_path = "pic"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_thumbnail.getOriginalFilename());
-            File upyunFile_thumbnail = saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);//这里主要的作用是转换CommonsMultipartFile为File，实际File存储在又拍云上
-            weapon_thumbnail_path = "/szmilitary/upload/thumbnail/"+weapon_thumbnail_path;
-            try {
-                boolean result = upYun.writeFile(weapon_thumbnail_path, upyunFile_thumbnail,true);//上传文件到又拍云中
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+//            File upyunFile_thumbnail = saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);//这里主要的作用是转换CommonsMultipartFile为File，实际File存储在又拍云上
+            saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);
+//            weapon_thumbnail_path = "/szmilitary/upload/thumbnail/"+weapon_thumbnail_path;
+//            try {
+//                boolean result = upYun.writeFile(weapon_thumbnail_path, upyunFile_thumbnail,true);//上传文件到又拍云中
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+            weapon_thumbnail_path = filePath+weapon_thumbnail_path;
         }
         if (!weapon_model.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_model_path = "mod"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_model.getOriginalFilename());
-            File upyunFile_model = saveFile(filePath+weapon_model_path,weapon_model);
-            weapon_model_path = "/szmilitary/upload/model/"+weapon_model_path;
-            try {
-                upYun.writeFile(weapon_model_path,upyunFile_model,true);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            System.out.println(setting.ghpath+weapon_model.getOriginalFilename());
+//            File upyunFile_model = saveFile(filePath+weapon_model_path,weapon_model);
+            saveFile(filePath+weapon_model_path,weapon_model);
+//            weapon_model_path = "/szmilitary/upload/model/"+weapon_model_path;
+//            try {
+//                upYun.writeFile(weapon_model_path,upyunFile_model,true);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+            weapon_model_path = filePath+weapon_model_path;
         }
         if (!weapon_texture.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_texture_path = "texture"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_texture.getOriginalFilename());
-            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_texture);
-            weapon_texture_path = "/szmilitary/upload/texture/"+weapon_texture_path;
-            try {
-                upYun.writeFile(weapon_texture_path,upyunFile_texture);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+//            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_texture);
+            saveFile(filePath+weapon_texture_path,weapon_texture);
+//            weapon_texture_path = "/szmilitary/upload/texture/"+weapon_texture_path;
+//            try {
+//                upYun.writeFile(weapon_texture_path,upyunFile_texture);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+            weapon_texture_path = filePath+weapon_texture_path;
         }
         String weapon_name = request.getParameter("weapon_name");
         String weapon_country = request.getParameter("weapon_country");
@@ -108,10 +113,13 @@ public class AdminWeapon {
         weaponDomain.setWeapon_category(weapon_category);
         weaponDomain.setWeapon_country(weapon_country);
         weaponDomain.setWeapon_attr(weapon_attr);
-        weaponDomain.setWeapon_thumbnail("http://ccssz.b0.upaiyun.com" + weapon_thumbnail_path);
-        weaponDomain.setWeapon_model("http://ccssz.b0.upaiyun.com" + weapon_model_path);
-        weaponDomain.setWeapon_texture("http://ccssz.b0.upaiyun.com" + weapon_texture_path);
-        weaponDomain.setWeapon_gh_path(setting.ghpath+weapon_model.getOriginalFilename());
+//        weaponDomain.setWeapon_thumbnail("http://ccssz.b0.upaiyun.com" + weapon_thumbnail_path);
+//        weaponDomain.setWeapon_model("http://ccssz.b0.upaiyun.com" + weapon_model_path);
+//        weaponDomain.setWeapon_texture("http://ccssz.b0.upaiyun.com" + weapon_texture_path);
+        weaponDomain.setWeapon_thumbnail(weapon_thumbnail_path);
+        weaponDomain.setWeapon_model(weapon_model_path);
+        weaponDomain.setWeapon_texture(weapon_texture_path);
+        weaponDomain.setWeapon_gh_path(setting.ghpath + weapon_model.getOriginalFilename());
         weaponService.addWeapon(weaponDomain);
         return "redirect:/admin/weapon/list";
     }
@@ -153,39 +161,46 @@ public class AdminWeapon {
         if (!weapon_thumbnail.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_thumbnail_path = "pic"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_thumbnail.getOriginalFilename());
-            File upyunFile_thumbnail = saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);
-            weapon_thumbnail_path = "/szmilitary/upload/thumbnail/"+weapon_thumbnail_path;
-            try {
-                boolean result = upYun.writeFile(weapon_thumbnail_path, upyunFile_thumbnail,true);//上传文件到又拍云中
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            weaponDomain.setWeapon_thumbnail("http://ccssz.b0.upaiyun.com"+weapon_thumbnail_path);
+//            File upyunFile_thumbnail = saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);
+//            weapon_thumbnail_path = "/szmilitary/upload/thumbnail/"+weapon_thumbnail_path;
+//            try {
+//                boolean result = upYun.writeFile(weapon_thumbnail_path, upyunFile_thumbnail,true);//上传文件到又拍云中
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            weaponDomain.setWeapon_thumbnail("http://ccssz.b0.upaiyun.com"+weapon_thumbnail_path);
+            saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);
+            weaponDomain.setWeapon_thumbnail(filePath+weapon_thumbnail_path);
+
         }
         if (!weapon_model.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_model_path = "mod"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_model.getOriginalFilename());
-            File upyunFile_model = saveFile(filePath+weapon_model_path,weapon_model);
-            weapon_model_path = "/szmilitary/upload/model/"+weapon_model_path;
-            try {
-                boolean result = upYun.writeFile(weapon_model_path,upyunFile_model,true);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            weaponDomain.setWeapon_model("http://ccssz.b0.upaiyun.com"+weapon_model_path);
-            weaponDomain.setWeapon_gh_path(setting.ghpath+weapon_model.getOriginalFilename());
+//            File upyunFile_model = saveFile(filePath+weapon_model_path,weapon_model);
+//            weapon_model_path = "/szmilitary/upload/model/"+weapon_model_path;
+//            try {
+//                boolean result = upYun.writeFile(weapon_model_path,upyunFile_model,true);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            weaponDomain.setWeapon_model("http://ccssz.b0.upaiyun.com"+weapon_model_path);
+            saveFile(filePath+weapon_model_path,weapon_model);
+            weaponDomain.setWeapon_model(filePath+weapon_model_path);
+            weaponDomain.setWeapon_gh_path(setting.ghpath + weapon_model.getOriginalFilename());
         }
         if (!weapon_texture.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
             weapon_texture_path = "texture"+d.getTime()+randInt()+"."+FilenameUtils.getExtension(weapon_texture.getOriginalFilename());
-            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_texture);
-            weapon_texture_path = "/szmilitary/upload/texture/"+weapon_texture_path;
-            try{
-                boolean result = upYun.writeFile(weapon_texture_path,upyunFile_texture,true);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            weaponDomain.setWeapon_texture("http://ccssz.b0.upaiyun.com"+weapon_texture_path);
+//            File upyunFile_texture = saveFile(filePath+weapon_texture_path,weapon_texture);
+//            weapon_texture_path = "/szmilitary/upload/texture/"+weapon_texture_path;
+//            try{
+//                boolean result = upYun.writeFile(weapon_texture_path,upyunFile_texture,true);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            weaponDomain.setWeapon_texture("http://ccssz.b0.upaiyun.com"+weapon_texture_path);
+            saveFile(filePath+weapon_texture_path,weapon_texture);
+            weaponDomain.setWeapon_texture(filePath+weapon_texture_path);
         }
         String weapon_name = request.getParameter("weapon_name");
         String weapon_country = request.getParameter("weapon_country");
@@ -210,7 +225,7 @@ public class AdminWeapon {
         return randomNum;
     }
 
-    private File saveFile(String filepath,MultipartFile file) {
+    private void saveFile(String filepath,MultipartFile file) {
         File tmpFile = new File(filepath);
         try {
             // 转存文件
@@ -218,6 +233,6 @@ public class AdminWeapon {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return tmpFile;
+//        return tmpFile;
     }
 }
