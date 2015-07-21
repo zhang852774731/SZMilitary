@@ -53,6 +53,7 @@ public class AdminWeapon {
                                   @RequestParam(value = "weapon_model") CommonsMultipartFile weapon_model,
                                   @RequestParam(value = "weapon_texture") CommonsMultipartFile weapon_texture){
         String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/";
+//        String filePath = request.getContextPath()+"upload/";
         String weapon_thumbnail_path = "";
         String weapon_model_path = "";
         String weapon_texture_path = "";
@@ -76,7 +77,7 @@ public class AdminWeapon {
 //            }catch (Exception e){
 //                e.printStackTrace();
 //            }
-            weapon_thumbnail_path = filePath+weapon_thumbnail_path;
+            weapon_thumbnail_path = "/upload/"+weapon_thumbnail_path;
         }
         if (!weapon_model.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
@@ -89,7 +90,7 @@ public class AdminWeapon {
 //            }catch (Exception e){
 //                e.printStackTrace();
 //            }
-            weapon_model_path = filePath+weapon_model_path;
+            weapon_model_path = "/upload/"+weapon_model_path;
         }
         if (!weapon_texture.isEmpty()){
             Timestamp d = new Timestamp(System.currentTimeMillis());
@@ -102,7 +103,7 @@ public class AdminWeapon {
 //            }catch (Exception e){
 //                e.printStackTrace();
 //            }
-            weapon_texture_path = filePath+weapon_texture_path;
+            weapon_texture_path = "/upload/"+weapon_texture_path;
         }
         String weapon_name = request.getParameter("weapon_name");
         String weapon_country = request.getParameter("weapon_country");
@@ -170,7 +171,7 @@ public class AdminWeapon {
 //            }
 //            weaponDomain.setWeapon_thumbnail("http://ccssz.b0.upaiyun.com"+weapon_thumbnail_path);
             saveFile(filePath+weapon_thumbnail_path,weapon_thumbnail);
-            weaponDomain.setWeapon_thumbnail(filePath+weapon_thumbnail_path);
+            weaponDomain.setWeapon_thumbnail("/upload/"+weapon_thumbnail_path);
 
         }
         if (!weapon_model.isEmpty()){
@@ -185,7 +186,7 @@ public class AdminWeapon {
 //            }
 //            weaponDomain.setWeapon_model("http://ccssz.b0.upaiyun.com"+weapon_model_path);
             saveFile(filePath+weapon_model_path,weapon_model);
-            weaponDomain.setWeapon_model(filePath+weapon_model_path);
+            weaponDomain.setWeapon_model("/upload/"+weapon_model_path);
             weaponDomain.setWeapon_gh_path(setting.ghpath + weapon_model.getOriginalFilename());
         }
         if (!weapon_texture.isEmpty()){
@@ -200,7 +201,7 @@ public class AdminWeapon {
 //            }
 //            weaponDomain.setWeapon_texture("http://ccssz.b0.upaiyun.com"+weapon_texture_path);
             saveFile(filePath+weapon_texture_path,weapon_texture);
-            weaponDomain.setWeapon_texture(filePath+weapon_texture_path);
+            weaponDomain.setWeapon_texture("/upload/"+weapon_texture_path);
         }
         String weapon_name = request.getParameter("weapon_name");
         String weapon_country = request.getParameter("weapon_country");
