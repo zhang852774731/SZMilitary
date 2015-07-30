@@ -7,11 +7,13 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by zhang on 2015/7/14.
  */
 @Service
+@Transactional
 public class PasswordService {
     @Value("${password.algorithmName}")
     private String algorithmName = "md5";

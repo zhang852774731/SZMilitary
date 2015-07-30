@@ -30,4 +30,15 @@ public class WeaponService {
     public void updateWeapon(WeaponDomain weaponDomain){weaponMapper.updateWeapon(weaponDomain);}
 
     public void delWeapon(int weaponid){weaponMapper.delWeapon(weaponid);}
+
+    public List<WeaponDomain> searchWeaponByName(String val){
+        return weaponMapper.searchWeaponByName(val);
+    }
+    public List<WeaponDomain> searchWeaponByCountry(String val){
+        return weaponMapper.searchWeaponByCountry(val);
+    }
+
+    public List<WeaponDomain> searchWeaponByCategory(String val){
+        return weaponMapper.searchWeaponByCategory(val);
+    }
 }

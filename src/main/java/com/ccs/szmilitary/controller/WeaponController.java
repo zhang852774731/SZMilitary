@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,22 @@ public class WeaponController {
     @RequestMapping(value = "/api/weapon/all")
     public  @ResponseBody Object getAllWeapon(){
         List<WeaponDomain> weaponDomains =  weaponService.getAll();
+        return weaponDomains;
+    }
+
+    @RequestMapping(value = "/api/weapon/search")
+    public @ResponseBody Object searchWeapon(HttpServletRequest request){
+
+        String cat = request.getParameter("cat");
+        String val = request.getParameter("val");
+        List<WeaponDomain> weaponDomains = new ArrayList<WeaponDomain>();
+        if ("weapon_name".equals(cat)){
+            weaponDomains = weaponService.searchWeaponByName(val);
+        }else if ("weapon_country".equals(cat)){
+            weaponDomains = weaponService.searchWeaponByCountry(val);
+        }else if ("weapon_category".equals(cat)){
+            weaponDomains = weaponService.searchWeaponByCategory(val);
+        }
         return weaponDomains;
     }
 

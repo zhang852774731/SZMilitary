@@ -37,4 +37,16 @@
         DELETE FROM weapon WHERE id = #{0}
     </delete>
 
+    <select id="searchWeaponByName" parameterType="String" resultMap="WeaponDomains">
+        SELECT * FROM weapon WHERE weapon_name LIKE CONCAT('%',#{0},'%')
+    </select>
+
+    <select id="searchWeaponByCountry" parameterType="String" resultMap="WeaponDomains">
+        SELECT * FROM weapon WHERE weapon_country LIKE CONCAT('%',#{0},'%')
+    </select>
+
+    <select id="searchWeaponByCategory" parameterType="String" resultMap="WeaponDomains">
+        SELECT * FROM weapon WHERE weapon_category LIKE CONCAT('%',#{0},'%')
+    </select>
+
 </mapper>

@@ -32,6 +32,10 @@ public class BroadcastController {
 
     @RequestMapping(value = "/api/broadcast/add",method = RequestMethod.POST)
     public @ResponseBody void addBroadcast(@RequestBody BroadcastDomain broadcastDomain){
+        List<BroadcastItemDomain> itemDomainsFromDB = broadcastService.getBroadcastByName(broadcastDomain.getBroadcast_name());
+        if (itemDomainsFromDB != null){//说明这个串联单已经存在，那么删除已经存在的
+            broadcastService.deleteBroadcastByName(broadcastDomain.getBroadcast_name());
+        }
         List<BroadcastWeaponDomain> broadcastWeaponDomains = broadcastDomain.getBroadcast_order();
         List<BroadcastItemDomain> broadcastItemDomains = new ArrayList<BroadcastItemDomain>();
         if (broadcastWeaponDomains != null && broadcastWeaponDomains.size()>0){
@@ -68,4 +72,5 @@ public class BroadcastController {
     public void deleteBroadcastByName(@PathVariable(value = "broadcast_name") String broadcast_name){
         broadcastService.deleteBroadcastByName(broadcast_name);
     }
+
 }

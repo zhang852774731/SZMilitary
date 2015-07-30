@@ -13,4 +13,7 @@ public interface WeaponMapper {
     public void addWeapon(WeaponDomain weaponDomain);
     public void updateWeapon(WeaponDomain weaponDomain);
     public void delWeapon(int weaponid);
+    public List<WeaponDomain> searchWeaponByName(String val);
+    public List<WeaponDomain> searchWeaponByCountry(String val);
+    public List<WeaponDomain> searchWeaponByCategory(String val);
 }
