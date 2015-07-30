@@ -61,30 +61,10 @@ public class WeaponController {
             }
         }
         WeaponDomain weaponDomain = weaponService.getWeaponById(Integer.parseInt(weapon_id));
-        if (!weaponDomain.getWeapon_texture().equals("http://ccssz.b0.upaiyun.com")){//说明贴图文件不为空
-            String[] parse_texture_path = weaponDomain.getWeapon_texture().split("/");
-            String texture_name = parse_texture_path[parse_texture_path.length-1];
-            String suffix = texture_name.substring(texture_name.lastIndexOf(".")+1);
-            File tmpFile = null;
-            try{
-                tmpFile = File.createTempFile("texture","."+suffix,filemake);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            filemake = new File(filemake+"/"+tmpFile.getName());
-            try{
-                URL url = new URL(weaponDomain.getWeapon_texture());
-                remoteFilePath = url.getPath();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            boolean result = upYun.readFile(remoteFilePath,filemake);
-            String tmp_texture = "/resources/webgl/tmp/texture/"+tmpFile.getName();
-            if (result){
-                model.addAttribute("texture_path",tmp_texture);
-            }
+        if (!weaponDomain.getWeapon_texture().equals("")){//说明贴图文件不为空
+            model.addAttribute("texture_path",weaponDomain.getWeapon_texture());
         }
-        if (!weaponDomain.getWeapon_model().equals("http://ccssz.b0.upaiyun.com")){//模型文件不为空
+        if (!weaponDomain.getWeapon_model().equals("")){//模型文件不为空
             model.addAttribute("model_path",weaponDomain.getWeapon_model());
         }
         return "/webgl/webgl";
