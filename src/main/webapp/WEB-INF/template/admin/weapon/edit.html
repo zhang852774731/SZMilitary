@@ -311,7 +311,7 @@
 
                                     <button type="submit" class="btn blue">Submit</button>
 
-                                    <button type="button" class="btn">Cancel</button>
+                                    <button type="button" class="btn" onclick="cancel()">Cancel</button>
 
                                 </div>
 
@@ -439,6 +439,10 @@
         FormComponents.init();
 
     });
+
+    function cancel(){
+        location.href = "/admin/weapon/list";
+    }
 
 </script>
 
