@@ -1,8 +1,11 @@
 package com.ccs.szmilitary.controller;
 
 import com.ccs.szmilitary.domain.WeaponDomain;
+import com.ccs.szmilitary.domain.WeaponDomainToReturn;
 import com.ccs.szmilitary.service.WeaponService;
+import com.ccs.szmilitary.util.PNGMapUtil;
 import main.java.com.UpYun;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +26,18 @@ import java.util.List;
 public class WeaponController {
     @Autowired
     private WeaponService weaponService;
-    @Autowired
-    private UpYun upYun;
 
     @RequestMapping(value = "/api/weapon/all")
     public  @ResponseBody Object getAllWeapon(){
         List<WeaponDomain> weaponDomains =  weaponService.getAll();
-        return weaponDomains;
+        List<WeaponDomainToReturn> weaponDomainToReturns = new ArrayList<WeaponDomainToReturn>();
+        for (WeaponDomain weaponDomain : weaponDomains){
+            WeaponDomainToReturn weaponDomainToReturn = new WeaponDomainToReturn();
+            BeanUtils.copyProperties(weaponDomain,weaponDomainToReturn);
+            weaponDomainToReturn.setCountry_img(PNGMapUtil.country_name_img_map().get(weaponDomainToReturn.getWeapon_country()));
+            weaponDomainToReturns.add(weaponDomainToReturn);
+        }
+        return weaponDomainToReturns;
     }
 
     @RequestMapping(value = "/api/weapon/search")
@@ -38,6 +46,7 @@ public class WeaponController {
         String cat = request.getParameter("cat");
         String val = request.getParameter("val");
         List<WeaponDomain> weaponDomains = new ArrayList<WeaponDomain>();
+        List<WeaponDomainToReturn> weaponDomainToReturns = new ArrayList<WeaponDomainToReturn>();
         if ("weapon_name".equals(cat)){
             weaponDomains = weaponService.searchWeaponByName(val);
         }else if ("weapon_country".equals(cat)){
@@ -45,13 +54,18 @@ public class WeaponController {
         }else if ("weapon_category".equals(cat)){
             weaponDomains = weaponService.searchWeaponByCategory(val);
         }
-        return weaponDomains;
+        for (WeaponDomain weaponDomain : weaponDomains){
+            WeaponDomainToReturn weaponDomainToReturn = new WeaponDomainToReturn();
+            BeanUtils.copyProperties(weaponDomain,weaponDomainToReturn);
+            weaponDomainToReturn.setCountry_img(PNGMapUtil.country_name_img_map().get(weaponDomainToReturn.getWeapon_country()));
+            weaponDomainToReturns.add(weaponDomainToReturn);
+        }
+        return weaponDomainToReturns;
     }
 
     @RequestMapping(value = "/api/weapon/{weapon_id}/webgl")
     public String getWebGL(@PathVariable(value = "weapon_id") String weapon_id,Model model,HttpServletRequest request){
         String filePath = request.getSession().getServletContext().getRealPath("/") + "resources/webgl/tmp/texture";
-        String remoteFilePath = "";
         File filemake = new File(filePath);
         if(!filemake.exists()){
             try {
