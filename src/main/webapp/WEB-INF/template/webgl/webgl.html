@@ -36,8 +36,11 @@
 
     var camera, scene, renderer;
 
-    var mouseX = 0, mouseY = 0;
-
+    var touchX = 0, touchY = 0;
+    var touchStart = 0;
+    var touchMove = 0;
+    var targetRotation = 0;
+    var targetRotationOnMouseDown = 0;
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
@@ -52,7 +55,7 @@
         document.body.appendChild( container );
 
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-        camera.position.z = 10;
+        camera.position.z = 5;
 
         // scene
 
@@ -128,6 +131,8 @@
 
         //
 
+        window.addEventListener( 'touchstart', onDocumentTouchStart, false );
+        window.addEventListener('touchmove',onDocumentTouchMove,false);
         window.addEventListener( 'resize', onWindowResize, false );
 
     }
@@ -144,7 +149,22 @@
 
     }
 
-    //
+    function onDocumentTouchStart(event){
+        if ( event.touches.length === 1 ) {
+            event.preventDefault();
+            touchStart = event.touches[0].pageX - windowHalfX;
+            targetRotationOnMouseDown = targetRotation;
+        }
+    }
+
+    function onDocumentTouchMove(event){
+        if ( event.touches.length === 1 ) {
+            event.preventDefault();
+            touchMove = event.touches[ 0 ].pageX - windowHalfX;
+            console.log(touchMove);
+            targetRotation = targetRotationOnMouseDown + ( touchMove - touchStart ) * 0.05;
+        }
+    }
 
     function animate() {
 
@@ -155,7 +175,8 @@
 
     function render() {
 
-        obj.rotation.y += 0.005;
+//        obj.rotation.y += 0.005;
+        obj.rotation.y += ( targetRotation - obj.rotation.y ) * 0.05;
         renderer.render( scene, camera );
 
     }
