@@ -22,7 +22,7 @@
     
     <insert id="addBroadcastBatch" parameterType="java.util.List">
         INSERT INTO broadcastlist(broadcast_name,broadcast_ctime,weapon_order,weapon_id,weapon_attr)
-        VALUE
+        VALUES
         <foreach collection="list" item="item" index="index" open="" close="" separator=",">
             (#{item.broadcast_name},#{item.broadcast_ctime},#{item.weapon_order},#{item.weapon_id},#{item.weapon_attr})
         </foreach>
