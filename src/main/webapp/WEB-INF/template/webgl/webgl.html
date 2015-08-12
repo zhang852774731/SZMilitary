@@ -21,14 +21,14 @@
             z-index: 100;
             display:block;
         }
-        #info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+        #info a, .button { color: #ffffff; font-weight: bold; text-decoration: underline; cursor: pointer }
     </style>
 </head>
 
 <body>
 <script src="/resources/webgl/js/three.min.js"></script>
 <script src="/resources/webgl/js/loader/OBJLoader.js"></script>
-
+<script src="/resources/webgl/js/TrackballControls.js"></script>
 <script th:inline="javascript">
 
     /*<![CDATA[*/
@@ -37,12 +37,16 @@
     var camera, scene, renderer;
 
     var touchX = 0, touchY = 0;
+    var mouseX = 0, mouseY = 0;
     var touchStart = 0;
     var touchMove = 0;
+    var touchMoveX = 0;
+    var touchMoveY = 0;
     var targetRotation = 0;
     var targetRotationOnMouseDown = 0;
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
+    var trackballControls;
 
     var obj = null;
     init();
@@ -54,14 +58,25 @@
         container = document.createElement( 'div' );
         document.body.appendChild( container );
 
+        // position and point the camera to the center of the scene
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.x = 0;
+        camera.position.y = 0;
         camera.position.z = 5;
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        trackballControls = new THREE.TrackballControls(camera);
+        trackballControls.rotateSpeed = 1.0;
+        trackballControls.zoomSpeed = 1.0;
+        trackballControls.panSpeed = 1.0;
+//        trackballControls.noZoom=false;
+//        trackballControls.noPan=false;
+        trackballControls.staticMoving = true;
 
         // scene
-
         scene = new THREE.Scene();
 
-        var ambient = new THREE.AmbientLight( 0x101030 );
+        var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
 
         var directionalLight = new THREE.DirectionalLight( 0xffeedd );
@@ -126,13 +141,13 @@
         renderer = new THREE.WebGLRenderer();
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
-        console.log(window.innerWidth+"----"+window.innerHeight)
+        console.log(window.innerWidth+"----"+window.innerHeight);
         container.appendChild( renderer.domElement );
 
         //
 
-        window.addEventListener( 'touchstart', onDocumentTouchStart, false );
-        window.addEventListener('touchmove',onDocumentTouchMove,false);
+//        window.addEventListener( 'touchstart', onDocumentTouchStart, false );
+//        window.addEventListener('touchmove',onDocumentTouchMove,false);
         window.addEventListener( 'resize', onWindowResize, false );
 
     }
@@ -148,7 +163,6 @@
         renderer.setSize( window.innerWidth, window.innerHeight );
 
     }
-
     function onDocumentTouchStart(event){
         if ( event.touches.length === 1 ) {
             event.preventDefault();
@@ -175,8 +189,8 @@
 
     function render() {
 
-//        obj.rotation.y += 0.005;
-        obj.rotation.y += ( targetRotation - obj.rotation.y ) * 0.05;
+//        obj.rotation.y += ( targetRotation - obj.rotation.y ) * 0.05;
+        trackballControls.update();
         renderer.render( scene, camera );
 
     }
