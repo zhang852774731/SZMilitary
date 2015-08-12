@@ -83,4 +83,9 @@ public class WeaponController {
         }
         return "/webgl/webgl";
     }
+
+    @RequestMapping(value = "/api/test/touch")
+    public String touch(){
+        return "/webgl/touch";
+    }
 }
