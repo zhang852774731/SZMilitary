@@ -29,6 +29,7 @@
 <script src="/resources/webgl/js/three.min.js"></script>
 <script src="/resources/webgl/js/loader/OBJLoader.js"></script>
 <script src="/resources/webgl/js/TrackballControls.js"></script>
+<script src="/resources/webgl/js/OrbitControls.js"></script>
 <script th:inline="javascript">
 
     /*<![CDATA[*/
@@ -47,7 +48,8 @@
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
     var trackballControls;
-
+    var orbitControls;
+    var clock;
     var obj = null;
     init();
     animate();
@@ -65,13 +67,17 @@
         camera.position.z = 5;
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        trackballControls = new THREE.TrackballControls(camera);
-        trackballControls.rotateSpeed = 1.0;
-        trackballControls.zoomSpeed = 1.0;
-        trackballControls.panSpeed = 1.0;
-//        trackballControls.noZoom=false;
-//        trackballControls.noPan=false;
-        trackballControls.staticMoving = true;
+        orbitControls = new THREE.OrbitControls(camera);
+        orbitControls.autoRotate = true;
+        clock = new THREE.Clock();
+
+//        trackballControls = new THREE.TrackballControls(camera);
+//        trackballControls.rotateSpeed = 1.0;
+//        trackballControls.zoomSpeed = 1.0;
+//        trackballControls.panSpeed = 1.0;
+////        trackballControls.noZoom=false;
+////        trackballControls.noPan=false;
+//        trackballControls.staticMoving = true;
 
         // scene
         scene = new THREE.Scene();
@@ -190,7 +196,9 @@
     function render() {
 
 //        obj.rotation.y += ( targetRotation - obj.rotation.y ) * 0.05;
-        trackballControls.update();
+//        trackballControls.update();
+        var delta = clock.getDelta();
+        orbitControls.update(delta);
         renderer.render( scene, camera );
 
     }
