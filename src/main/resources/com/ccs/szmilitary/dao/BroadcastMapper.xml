@@ -10,6 +10,7 @@
         <result column="weapon_order" property="weapon_order"/>
         <result column="weapon_id" property="weapon_id"/>
         <result column="weapon_attr" property="weapon_attr"/>
+        <result column="troops" property="troops"/>
     </resultMap>
 
     <select id="getAllBroadcast" resultType="String">
@@ -21,10 +22,10 @@
     </select>
     
     <insert id="addBroadcastBatch" parameterType="java.util.List">
-        INSERT INTO broadcastlist(broadcast_name,broadcast_ctime,weapon_order,weapon_id,weapon_attr)
+        INSERT INTO broadcastlist(broadcast_name,broadcast_ctime,weapon_order,weapon_id,weapon_attr,troops)
         VALUES
         <foreach collection="list" item="item" index="index" open="" close="" separator=",">
-            (#{item.broadcast_name},#{item.broadcast_ctime},#{item.weapon_order},#{item.weapon_id},#{item.weapon_attr})
+            (#{item.broadcast_name},#{item.broadcast_ctime},#{item.weapon_order},#{item.weapon_id},#{item.weapon_attr},#{item.troops})
         </foreach>
     </insert>
 

@@ -1,11 +1,9 @@
 package com.ccs.szmilitary.controller;
 
-import com.ccs.szmilitary.domain.BroadcastDomain;
-import com.ccs.szmilitary.domain.BroadcastItemDomain;
-import com.ccs.szmilitary.domain.BroadcastWeaponDomain;
-import com.ccs.szmilitary.domain.WeaponDomain;
+import com.ccs.szmilitary.domain.*;
 import com.ccs.szmilitary.service.BroadcastService;
 import com.ccs.szmilitary.service.WeaponService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +45,7 @@ public class BroadcastController {
                 broadcastItemDomain.setWeapon_id(broadcastWeaponDomain.getWeapon_id());
                 broadcastItemDomain.setWeapon_attr(broadcastWeaponDomain.getWeapon_attr());
                 broadcastItemDomain.setWeapon_order(i);
+                broadcastItemDomain.setTroops(broadcastWeaponDomain.getTroops());
                 i++;
                 broadcastItemDomains.add(broadcastItemDomain);
             }
@@ -56,13 +55,16 @@ public class BroadcastController {
 
     @RequestMapping(value = "/api/broadcast/get/{broadcast_name}")
     public @ResponseBody Object getBroadcastByName(@PathVariable(value = "broadcast_name") String broadcast_name){
-        List<WeaponDomain> weaponDomains = new ArrayList<WeaponDomain>();
+        List<BroadcastWeaponToReturn> weaponDomains = new ArrayList<BroadcastWeaponToReturn>();
         List<BroadcastItemDomain> broadcastItemDomains = broadcastService.getBroadcastByName(broadcast_name);
         if (broadcastItemDomains != null && broadcastItemDomains.size()>0){
             for (BroadcastItemDomain broadcastItemDomain : broadcastItemDomains){
+                BroadcastWeaponToReturn broadcastWeaponToReturn = new BroadcastWeaponToReturn();
                 WeaponDomain weaponDomain = weaponService.getWeaponById(broadcastItemDomain.getWeapon_id());
                 weaponDomain.setWeapon_attr(broadcastItemDomain.getWeapon_attr());//修改为选中的属性
-                weaponDomains.add(weaponDomain);
+                BeanUtils.copyProperties(weaponDomain, broadcastWeaponToReturn);
+                broadcastWeaponToReturn.setTroops(broadcastItemDomain.getTroops());
+                weaponDomains.add(broadcastWeaponToReturn);
             }
         }
         return weaponDomains;

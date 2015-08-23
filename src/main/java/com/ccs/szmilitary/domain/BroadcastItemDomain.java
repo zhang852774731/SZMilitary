@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by zhang on 2015/7/15.
+ * 保存到数据库中的模型
  */
 public class BroadcastItemDomain implements Serializable{
     private String broadcast_name;
@@ -11,6 +12,7 @@ public class BroadcastItemDomain implements Serializable{
     private int weapon_id;
     private int weapon_order;
     private String weapon_attr;
+    private String troops;
 
     public String getBroadcast_name() {
         return broadcast_name;
@@ -50,5 +52,13 @@ public class BroadcastItemDomain implements Serializable{
 
     public void setWeapon_attr(String weapon_attr) {
         this.weapon_attr = weapon_attr;
+    }
+
+    public String getTroops() {
+        return troops;
+    }
+
+    public void setTroops(String troops) {
+        this.troops = troops;
     }
 }
